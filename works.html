@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>制作実績</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="works-bg">
+
+  <!-- 🔄 ローディング -->
+  <div id="loading"><div class="loading-text">Loading...</div></div>
+
+  <!-- ヘッダー読み込み -->
+  <div id="header-area"></div>
+  <script>
+    fetch("header.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("header-area").innerHTML = data;
+      });
+  </script>
+
+  <section class="works-section">
+    <h2>制作実績</h2>
+
+    <div class="work-card">
+      <img src="image/1.png" alt="家計簿アプリの画像" />
+      <div class="work-info">
+        <h3>GAS家計簿アプリ</h3>
+        <p>Google Apps Script を使って、PayPayの使用履歴を読み取り自動入力ができ、PayPay以外はスマホの入力フォームからスプレッドシートに記録できる家計簿アプリを作成しました。</p>
+        <a href="https://docs.google.com/spreadsheets/d/1zdXfd8vgWfQJ-D8lsQOMRLZsWJ_csbC_UggboTxOw64/edit?usp=sharing" class="view-button" target="_blank">サンプルを見る</a>
+      </div>
+    </div>
+  </section>
+
+  <div style="text-align: center; margin: 40px 0;">
+    <a href="skills.html" class="next-button">◀ 戻る（スキル）</a>
+    <a href="contact.html" class="next-button">▶ 次へ（お問い合わせ）</a>
+  </div>
+
+  <footer><p style="text-align: center;">&copy; 2025 My Portfolio</p></footer>
+
+  <!-- 🔄 ローディングJS -->
+  <script>
+    window.addEventListener("load", function () {
+      const loading = document.getElementById("loading");
+      setTimeout(() => {
+        loading.classList.add("fade-out");
+      }, 500);
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome - My Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <style>
+    body {
+      
+      margin: 0;
+      overflow: hidden;
+      font-family: 'メイリオ', sans-serif;
+    }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+    header {
+      background-color: #333;
+      color: white;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav a {
+      color: white;
+      margin-left: 15px;
+      text-decoration: none;
+    }
+    .welcome-svg {
+      width: 100%;
+      height: 200px;
+      margin-top: 100px;
+    }
+    .welcome-svg text {
+      font-size: 50px;
+      fill: none;
+      stroke: white;
+      stroke-width: 1px;
+      stroke-dasharray: 300;
+      stroke-dashoffset: 300;
+      animation: draw 3s ease-out forwards;
+      transition: transform 0.3s, filter 0.3s;
+    }
+    .welcome-svg text:hover {
+      transform: scale(1.1);
+      filter: brightness(1.5);
+    }
+    @keyframes draw {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+    .intro-links {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .intro-links a {
+      color: #ccc;
+      margin: 0 10px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .intro-links a:hover {
+      color: white;
+      text-shadow: 0 0 5px white;
+    }
+    footer {
+      text-align: center;
+      margin-top: 100px;
+      color: white;
+    }
+   
+  </style>
+</head>
+<body class="home-bg">
+
+<div id="loading">
+  <div class="loading-text">Loading...</div>
+</div>
+
+  
+<canvas id="particleCanvas"></canvas>
+<canvas id="smokeCanvas"></canvas>
+<div id="header-area"></div>
+
+<script>
+  fetch("header.html")
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById("header-area").innerHTML = data;
+    });
+</script>
+
+
+<section id="hero">
+  <svg viewBox="0 0 400 100" class="welcome-svg">
+    <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle">
+      WELCOME！！
+    </text>
+  </svg>
+
+</section>
+
+<footer>
+  <p>&copy; 2025 My Portfolio</p>
+</footer>
+
+<script>
+  AOS.init();
+
+  // ① 粒子アニメーション
+  const particleCanvas = document.getElementById('particleCanvas');
+  const ctx1 = particleCanvas.getContext('2d');
+  particleCanvas.width = window.innerWidth;
+  particleCanvas.height = window.innerHeight;
+  let particles = [];
+
+  for (let i = 0; i < 100; i++) {
+    particles.push({
+      x: Math.random() * particleCanvas.width,
+      y: Math.random() * particleCanvas.height,
+      r: Math.random() * 2 + 1,
+      dx: (Math.random() - 0.5) * 0.5,
+      dy: (Math.random() - 0.5) * 0.5
+    });
+  }
+
+  function drawParticles() {
+    ctx1.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
+    ctx1.fillStyle = 'rgba(255,255,255,0.6)';
+    particles.forEach(p => {
+      ctx1.beginPath();
+      ctx1.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx1.fill();
+      p.x += p.dx;
+      p.y += p.dy;
+
+      if (p.x < 0 || p.x > particleCanvas.width) p.dx *= -1;
+      if (p.y < 0 || p.y > particleCanvas.height) p.dy *= -1;
+    });
+    requestAnimationFrame(drawParticles);
+  }
+  drawParticles();
+
+  // ⑤ モヤアニメーション（ノイズ風）
+  const smokeCanvas = document.getElementById('smokeCanvas');
+  const ctx2 = smokeCanvas.getContext('2d');
+  smokeCanvas.width = window.innerWidth;
+  smokeCanvas.height = window.innerHeight;
+
+  function drawSmoke() {
+    let imgData = ctx2.createImageData(smokeCanvas.width, smokeCanvas.height);
+    for (let i = 0; i < imgData.data.length; i += 4) {
+      let val = Math.random() * 20;
+      imgData.data[i] = val;
+      imgData.data[i + 1] = val;
+      imgData.data[i + 2] = val;
+      imgData.data[i + 3] = 6;
+    }
+    ctx2.putImageData(imgData, 0, 0);
+    requestAnimationFrame(drawSmoke);
+  }
+  drawSmoke();
+
+  // ③ マウスカーソルの軌跡アニメーション
+  document.addEventListener('mousemove', function(e) {
+    const trail = document.createElement('div');
+    trail.className = 'trail';
+    trail.style.left = e.pageX + 'px';
+    trail.style.top = e.pageY + 'px';
+    document.body.appendChild(trail);
+    setTimeout(() => trail.remove(), 400);
+  });
+</script>
+<div style="text-align: center; margin-top: 40px;">
+  <a href="about.html" class="next-button">▶ 次へ（プロフィール）</a>
+</div>
+
+<script>
+ window.addEventListener("load", function() {
+  const loading = document.getElementById("loading");
+  setTimeout(() => {
+    loading.classList.add("fade-out");
+  }, 500); // ← 0.5秒後にフェードアウト（1000 = 1秒）
+});
+
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>送信完了</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="contact-bg">
+  <div id="header-area"></div>
+  <script>
+    fetch("header.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("header-area").innerHTML = data;
+      });
+  </script>
+
+  <section class="contact-section">
+    <h2>送信完了しました</h2>
+    <p>お問い合わせいただきありがとうございました。<br>折り返しご連絡いたします。</p>
+
+    <div style="text-align: center; margin-top: 30px;">
+      <a href="index.html" class="next-button">トップへ戻る</a>
+    </div>
+  </section>
+
+  <footer><p style="text-align: center;">&copy; 2025 My Portfolio</p></footer>
+
+<!-- 🔄 ローディングJS -->
+  <script>
+    window.addEventListener("load", function () {
+      const loading = document.getElementById("loading");
+      setTimeout(() => {
+        loading.classList.add("fade-out");
+      }, 500);
+    });
+  </script>
+
+
+</body>
+</html>

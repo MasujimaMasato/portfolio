@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>スキル</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="skills-bg">
+
+
+    
+  <div id="loading"><div class="loading-text">Loading...</div></div>
+
+  <div id="header-area"></div>
+  <script>
+    fetch("header.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("header-area").innerHTML = data;
+      });
+  </script>
+
+  <!-- ここにスキルカードを入れていくよ -->
+  <section class="skills-section">
+    <div class="skill-card">
+<div class="skill-icon">
+    <img src="image/Google.png" alt="GASのアイコン" />
+  </div>
+  <div class="skill-content">
+    <h3>GAS</h3>
+    <p>Googleサービスの自動化を学習中です。</p>
+  </div>
+</div>
+<div class="skill-card">
+  <div class="skill-icon">
+    <img src="image/Excel.png" alt="VBAのアイコン" />
+  </div>
+  <div class="skill-content">
+    <h3>VBA</h3>
+    <p>Excel操作の効率化に活用できるよう、基礎を学びました。</p>
+  </div>
+</div>
+
+
+<div class="skill-card">
+ <div class="skill-icon">
+    <img src="image/html.png" alt="HTMLのアイコン" />
+  </div>
+  <div class="skill-content">
+    <h3>HTML</h3>
+    <p>Webサイトの構造を理解するために、基本から学習中です。</p>
+  </div>
+</div>
+
+<div class="skill-card">
+  <div class="skill-icon">
+    <img src="image/CSS.png" alt="CSSのアイコン" />
+  </div>
+  <div class="skill-content">
+    <h3>CSS</h3>
+    <p>見た目のデザイン表現に興味があり、スタイルの工夫を試しています。</p>
+  </div>
+</div>
+
+    <!-- GASカードなどを入れる -->
+  </section>
+
+  <div style="text-align: center; margin: 40px 0;">
+    <a href="about.html" class="next-button">◀ 戻る（プロフィール）</a>
+    <a href="works.html" class="next-button">▶ 次へ（制作実績）</a>
+  </div>
+
+
+
+
+  <footer><p style="text-align: center;">&copy; 2025 My Portfolio</p></footer>
+ <!-- 🔄 ローディングJS -->
+  <script>
+    window.addEventListener("load", function() {
+      const loading = document.getElementById("loading");
+      setTimeout(() => {
+        loading.classList.add("fade-out");
+      }, 500);
+    });
+  </script>
+<!--　軌跡　 -->
+<script>
+  document.addEventListener("mousemove", function(e) {
+    const trail = document.createElement("div");
+    trail.className = "trail";
+    trail.style.left = e.pageX + "px";
+    trail.style.top = e.pageY + "px";
+    document.body.appendChild(trail);
+
+    // 一定時間後に削除
+    setTimeout(() => {
+      trail.remove();
+    }, 400);
+  });
+</script>
+
+
+</body>
+</html>

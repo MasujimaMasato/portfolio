@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>プロフィール</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+  
+
+    .profile-container {
+      display: flex;
+      align-items: center;
+      padding: 60px 20px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+      gap: 30px;
+    }
+
+    .profile-photo {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #fff;
+    }
+
+    .profile-text {
+      flex: 1;
+      font-size: 1.1em;
+      line-height: 1.8;
+    }
+
+    .profile-description {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+      font-size: 1em;
+      line-height: 1.8;
+      text-align: center;
+    }
+  </style>
+</head>
+<body class="about-bg">
+
+
+  <!-- ローディング画面 -->
+  <div id="loading">
+    <div class="loading-text">Loading...</div>
+  </div>
+
+ <div id="header-area"></div>
+
+<script>
+  fetch("header.html")
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById("header-area").innerHTML = data;
+    });
+</script>
+
+
+  <section class="profile-container">
+    <img src="image/profile.png" alt="プロフィール写真" class="profile-photo" />
+    <div class="profile-text">
+      <h2>増島 聖人</h2>
+      <p>職業訓練にてITを学習中。</p>
+      <p>GASでの自動化ツール開発に加え、JavaScriptやWordPressにも挑戦中！</p>
+    </div>
+  </section>
+
+  <div class="profile-description">
+    <p>
+      わかりやすく、実用的なWeb制作を目指して日々学習しています。<br>
+      将来的には、自分のアイディアを形にするためのサービスやツールを作れるようになるのが目標です。
+    </p>
+  </div>
+
+  <div style="text-align: center; margin: 40px 0;">
+    <a href="index.html" class="next-button">◀ 戻る（Welcome）</a>
+    <a href="skills.html" class="next-button">▶ 次へ（スキル）</a>
+  </div>
+
+  <footer>
+    <p style="text-align: center;">&copy; 2025 My Portfolio</p>
+  </footer>
+
+<script>
+  // ③ マウスカーソルの軌跡アニメーション
+  document.addEventListener('mousemove', function(e) {
+    const trail = document.createElement('div');
+    trail.className = 'trail';
+    trail.style.left = e.pageX + 'px';
+    trail.style.top = e.pageY + 'px';
+    document.body.appendChild(trail);
+    setTimeout(() => trail.remove(), 400);
+  });
+</script>
+
+  <!-- JavaScriptは最後に追加 -->
+  <script>
+    window.addEventListener("load", function() {
+  const loading = document.getElementById("loading");
+  setTimeout(() => {
+    loading.classList.add("fade-out");
+  }, 500); // ← 0.5秒後にフェードアウト（1000 = 1秒）
+});
+
+  </script>
+
+</body>
+</html>

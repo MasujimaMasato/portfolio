@@ -1,0 +1,418 @@
+html, body {
+  height: 100%;
+}
+
+/* 全体の初期設定 */
+body {
+  position: relative;  /* ← これを追加！ */
+  margin: 0;
+  font-family: 'メイリオ', sans-serif;
+  color: #c0c0c0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* 半透明の黒 */
+  z-index: -1;
+}
+
+
+
+/* ヘッダー */
+header {
+  background-color: #333;
+  color: white;
+  padding: 10px 20px; /* 上下10pxに変更 */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+header h1 {
+  margin: 0;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  padding: 0;
+  margin-top: 10px;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* セクション共通 */
+section {
+  padding: 40px 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* フッター */
+footer {
+  background-color: transparent; /* ← これがポイント！ */
+  text-align: center;
+  padding: 20px;
+  color: #fff; /* 白文字にして見やすく */
+}
+
+@media (max-width: 768px) {
+  /* スマホ用レイアウト */
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  section {
+    padding: 20px 10px;
+  }
+
+  #hero img {
+    max-height: 200px;
+  }
+
+  header, footer {
+    text-align: center;
+  }
+}
+
+h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+  border-left: 5px solid #ccc;
+  padding-left: 10px;
+}
+
+.about-flex {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.about-flex h2 {
+  white-space: nowrap;
+  margin: 0;
+}
+
+.about-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.about-content img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #fff;
+}
+
+.about-text {
+  color: #fff;
+  line-height: 1.8;
+  max-width: 400px;
+}
+
+.welcome-svg {
+  width: 100%;
+  height: 200px;
+  margin-top: 50px;
+}
+
+.welcome-svg text {
+  font-size: 40px;
+  fill: none;
+  stroke: white;
+  stroke-width: 2px; /* ← 少し太めに */
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  animation: draw 3s ease-out forwards;
+  filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.5)); /* 影で浮かせる */
+}
+
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.next-button {
+  display: inline-block;
+  padding: 10px 25px;
+  background-color: #fff;
+  color: #333;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s;
+  margin: 0 10px;
+}
+
+.next-button:hover {
+  background-color: #333;
+  color: #fff;
+  box-shadow: 0 0 10px #fff;
+}
+
+.logo {
+  color: white;
+  text-decoration: none;
+}
+
+.logo:hover {
+  text-decoration: underline;
+}
+
+#loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  z-index: 9999;
+  transition: opacity 1s ease, visibility 1s;
+}
+
+#loading.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* style.css に追加しておくと、どのページでも使い回せます♪ */
+.trail {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  animation: fadeOut 0.4s forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+/* 共通：背景設定（ページごとに切り替え） */
+.home-bg {
+  background: url("image/hp-cat.jpg") no-repeat center center fixed;
+  background-size: cover;
+  background-attachment: fixed;
+  background-color: #f9f9f9;
+}
+
+.about-bg {
+  background: url("image/cat2.jpg") no-repeat center center fixed;
+  background-size: cover;
+  background-attachment: fixed;
+  background-color: #000;
+}
+
+.skills-bg {
+  background: url("image/cat3.jpg") no-repeat center center fixed;
+  background-size: cover;
+  background-attachment: fixed;
+  background-color: #f4f4f4;
+}
+
+.works-bg {
+  background: url("image/cat4.jpg") no-repeat center center fixed;
+  background-size: cover;
+  background-attachment: fixed;
+  background-color: #111;
+}
+
+.contact-bg {
+  background: url("image/cat5.jpg") no-repeat center center fixed;
+  background-size: cover;
+  background-attachment: fixed;
+  background-color: #222; /* フォールバックカラー（画像が表示されないとき） */
+}
+
+
+
+/*スキルカードについての設定*/
+.skills-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px 20px;
+}
+
+.skill-card {
+  width: 250px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  padding: 20px;
+  color: #eee;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer; /* ← ポインター表示にするとクリックできそうに見える！ */
+}
+
+.skill-card:hover {
+  transform: scale(1.05) translateY(-5px);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+}
+
+
+.skill-icon {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;  /* ← これが重要！ */
+  margin-bottom: 10px;
+}
+
+
+
+.skill-content h3 {
+  margin: 0;
+  font-size: 1.2em;
+  color: #fff;
+}
+
+.skill-content p {
+  font-size: 0.95em;
+  color: #ccc;
+  margin-top: 5px;
+}
+
+.skill-icon img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+/*制作物系*/
+
+.work-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 0 8px rgba(255,255,255,0.1);
+}
+
+.work-card img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+
+
+.work-info h3 {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+.view-button {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 20px;
+  background-color: #fff;
+  color: #333;
+  border-radius: 20px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.view-button:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+/* お問い合わせセクション */
+.contact-section {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 40px 20px;
+  border-radius: 12px;
+  margin: 40px auto;
+  max-width: 800px;
+  box-shadow: 0 0 10px rgba(255,255,255,0.1);
+  color: #fff;
+  text-align: center;
+}
+
+.contact-section h2 {
+  font-size: 1.6em;
+  margin-bottom: 10px;
+}
+
+.contact-section p {
+  font-size: 1em;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+  margin: auto;
+}
+
+form input,
+form textarea {
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #333;
+  font-size: 1em;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+form textarea {
+  height: 120px;
+  resize: vertical;
+}
+
+form input:focus,
+form textarea:focus {
+  outline: none;
+  box-shadow: 0 0 5px #fff;
+}
+/*ボーダー消し*/
+h2.no-border {
+  border-left: none;
+  padding-left: 0;
+}

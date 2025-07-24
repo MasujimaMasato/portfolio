@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>お問い合わせ</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="contact-bg">
+
+  <div id="loading"><div class="loading-text">Loading...</div></div>
+
+  <!-- ヘッダー読み込み -->
+  <div id="header-area"></div>
+  <script>
+    fetch("header.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("header-area").innerHTML = data;
+      });
+  </script>
+
+  <!-- お問い合わせフォーム -->
+   <section class="contact-section">
+  <h2 class="no-border">お問い合わせ</h2>
+  <p>ご質問・ご相談などお気軽にご連絡ください。</p>
+ <form id="contact-form">
+  <input type="text" name="name" placeholder="お名前" required><br>
+  <input type="email" name="email" placeholder="メールアドレス" required><br>
+  <textarea name="message" rows="5" placeholder="お問い合わせ内容" required></textarea><br>
+  <button type="submit">送信</button>
+</form>
+
+<script>
+  document.getElementById("contact-form").addEventListener("submit", function (e) {
+    e.preventDefault(); // デフォルトの送信をキャンセル
+    const form = e.target;
+
+    fetch("https://script.google.com/macros/s/AKfycbyFONXwALvVOEE0rTuXLnoebHA-qcmEHjnB9DURMx1TV__GULkFJEfqLEM1aIMtQrDh/exec", {
+      method: "POST",
+      body: new FormData(form),
+    })
+    .then(() => {
+      window.location.href = "thanks.html"; // ← 送信後にジャンプ！
+    })
+    .catch(() => {
+      alert("送信に失敗しました。時間をおいてもう一度お試しください。");
+    });
+  });
+</script>
+
+
+  <!-- フッター -->
+  <footer><p style="text-align: center;">&copy; 2025 My Portfolio</p></footer>
+
+  <!-- ローディングと軌跡のJS（必要なら） -->
+  <script>
+    window.addEventListener("load", function () {
+      const loading = document.getElementById("loading");
+      setTimeout(() => {
+        loading.classList.add("fade-out");
+      }, 500);
+    });
+  </script>
+
+<script>
+  // ③ マウスカーソルの軌跡アニメーション
+  document.addEventListener('mousemove', function(e) {
+    const trail = document.createElement('div');
+    trail.className = 'trail';
+    trail.style.left = e.pageX + 'px';
+    trail.style.top = e.pageY + 'px';
+    document.body.appendChild(trail);
+    setTimeout(() => trail.remove(), 400);
+  });
+</script>
+
+</body>
+</html>
